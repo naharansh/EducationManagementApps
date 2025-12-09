@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Task Stages -->
+    <record id="task_stage_todo" model="academy.task.stage">
+        <field name="name">To Do</field>
+        <field name="sequence">1</field>
+        <field name="color_index">2</field> <!-- Blue -->
+
+    </record>
+
+    <record id="task_stage_progress" model="academy.task.stage">
+        <field name="name">In Progress</field>
+        <field name="sequence">2</field>
+        <field name="color_index">3</field> <!-- Orange -->
+
+    </record>
+
+    <record id="task_stage_done" model="academy.task.stage">
+        <field name="name">Completed</field>
+        <field name="sequence">3</field>
+        <field name="color_index">10</field> <!-- Green -->
+
+    </record>
+
+    <!-- Search view with filters -->
+    <record id="view_task_search" model="ir.ui.view">
+        <field name="name">edu.task.search</field>
+        <field name="model">edu.task</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="due_today"
+                        string="Due Today"
+                        domain="[('deadline','=',context_today())]"/>
+                <filter name="in_progress"
+                        string="In Progress"
+                        domain="[('stage_id.name','=','In Progress')]"/>
+                <filter name="overdue"
+                        string="Overdue"
+                        domain="[('is_overdue','=',True)]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

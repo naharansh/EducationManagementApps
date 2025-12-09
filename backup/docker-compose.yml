@@ -1,0 +1,19 @@
+
+version: "3.9"
+services:
+  odoo:
+    image: odoo:19.0
+  
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=host.docker.internal
+      - USER=student_managements
+      - PASSWORD=admin
+    volumes:
+      - ./extra-addons:/mnt/extra-addons
+      - ./config:/etc/odoo
+    command: [ "odoo", "-c", "/etc/odoo/odoo.conf" ]
+
+volumes:
+  odoo-db-data:

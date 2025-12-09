@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ROOT MENU -->
+    <menuitem id="student_management.menu_edu_root"
+              name="Education Management"
+              sequence="1"/>
+
+    <!-- STUDENTS -->
+    <menuitem id="student_management.menu_students"
+              parent="student_management.menu_edu_root"
+              action="student_management.action_students"
+              name="Students"
+              sequence="10"/>
+
+    <!-- CLASSES / BATCHES -->
+    <menuitem id="student_management.menu_batch_class"
+              parent="student_management.menu_edu_root"
+              action="student_management.action_batch_class"
+              name="Classes / Batches"
+              sequence="20"/>
+
+    <!-- TEACHERS -->
+    <menuitem id="student_management.menu_teacher"
+              parent="student_management.menu_edu_root"
+              action="student_management.action_teacher"
+              name="Teachers"
+              sequence="30"/>
+
+    <!-- DAILY RECORDS -->
+    <menuitem id="student_management.menu_daily_record"
+              parent="student_management.menu_edu_root"
+              action="student_management.action_daily_record"
+              name="Daily Records"
+              sequence="40"/>
+
+    <!-- MONTHLY ATTENDANCE -->
+    <menuitem id="student_management.menu_monthly_attendance"
+              parent="student_management.menu_edu_root"
+              action="student_management.action_monthly_attendance"
+              name="Monthly Attendance"
+              sequence="50"/>
+
+    <!-- TIMETABLE ROOT -->
+    <menuitem id="student_management.menu_timetable_root"
+              parent="student_management.menu_edu_root"
+              name="Timetable"
+              sequence="60"/>
+
+    <menuitem id="student_management.menu_class_timetable"
+              parent="student_management.menu_timetable_root"
+              action="student_management.action_class_timetable"
+              name="Weekly Timetable"
+              sequence="10"/>
+
+    <!-- FEES ROOT -->
+    <menuitem id="student_management.menu_fee_root"
+              name="Fees"
+              parent="student_management.menu_edu_root"
+              sequence="70"/>
+
+    <menuitem id="student_management.menu_student_fees"
+              name="Monthly Fees"
+              parent="student_management.menu_fee_root"
+              action="student_management.action_student_fees"
+              sequence="10"/>
+
+    <menuitem id="student_management.menu_fee_due"
+              name="Monthly Fee Dues"
+              parent="student_management.menu_fee_root"
+              action="student_management.action_fee_due"
+              sequence="20"/>
+
+    <menuitem id="student_management.menu_fee_payment"
+              name="Fee Payments"
+              parent="student_management.menu_fee_root"
+              action="student_management.action_student_fee_payment"
+              sequence="30"/>
+
+    <menuitem id="student_management.menu_remaining_fee_students"
+              name="Remaining Fee This Month"
+              parent="student_management.menu_fee_root"
+              action="student_management.action_remaining_fee_students"
+              sequence="50"/>
+
+    <!-- TASK MANAGEMENT ROOTS -->
+    <menuitem id="menu_academy_root"
+                parent="student_management.menu_edu_root"
+              name="Education Management"
+              sequence="80"/>
+
+    <menuitem id="menu_academy_tasks"
+              name="Tasks"
+              parent="student_management.menu_edu_root"
+              action="action_academy_tasks"
+              sequence="20"/>
+
+    <menuitem id="menu_academy_task_stages"
+              name="Task Stages"
+              parent="student_management.menu_edu_root"
+              action="action_academy_task_stages"
+              sequence="30"/>
+
+    <!-- REPORTS ROOT FIXED (NO RECURSION) -->
+    <menuitem id="menu_reports_root"
+              name="Reports"
+              parent="student_management.menu_edu_root"
+              sequence="40"/>
+
+    <!-- REPORT MENUS -->
+    <menuitem id="menu_student_list"
+              name="Student List by Class"
+              parent="menu_reports_root"
+              action="action_student_list"/>
+
+    <menuitem id="menu_class_strength"
+              name="Class Strength Report"
+              parent="menu_reports_root"
+              action="action_class_strength"/>
+
+    <menuitem id="menu_monthly_attendance_report"
+          name="Monthly Attendance Report"
+          parent="menu_reports_root"
+          action="action_student_attendance_graph"
+          sequence="50"/>
+
+  
+<menuitem id="menu_fee_dues_payments_graph"
+          name="Fee Dues vs Payments"
+            parent="menu_reports_root"
+          action="action_fee_dues_payments_graph"/>
+
+    <menuitem id="menu_fee_statement"
+              name="Fee Statement Per Student"
+              parent="menu_reports_root"
+              action="action_fee_statement"/>
+<menuitem id="menu_teacher_timetable_report"
+          name="Teacher Timetable Report"
+          parent="menu_reports_root"
+          action="action_teacher_timetable_report"/>
+
+              <menuitem id="menu_attendance_root" name="Attendance" parent="student_management.menu_edu_root" sequence="40"/>
+<menuitem id="menu_monthly_attendance" name="Monthly Attendance" parent="menu_attendance_root" action="action_monthly_attendance" sequence="50"/>
+<!-- <menuitem id="menu_attendance_graph" name="Attendance Graph" parent="menu_attendance_root" action="action_attendance_graph" sequence="60"/> -->
+
+
+</odoo>

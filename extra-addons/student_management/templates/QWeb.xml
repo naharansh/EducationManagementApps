@@ -1,0 +1,25 @@
+<template id="class_strength_report_document">
+    <t t-call="web.external_layout">
+        <div class="page">
+            <h2>Class Strength Report</h2>
+
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Class Name</th>
+                        <th>Student Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="docs" t-as="rec">
+                        <tr>
+                            <td><t t-esc="rec.name"/></td>
+                            <td><t t-esc="rec.student_count"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+
+        </div>
+    </t>
+</template>

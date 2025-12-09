@@ -1,0 +1,54 @@
+/* ============================
+   Custom Kanban Card Styles
+============================ */
+
+/* Card container */
+.my-task-card {
+    border: 1px solid #dcdcdcf3;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 6px 0;
+    background-color: transparent;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.137);
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.my-task-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Task title */
+.my-task-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2a2a2a;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Task details container */
+.my-task-details {
+    font-size: 25px;
+    color: #555555;
+    margin-bottom: 4px;
+}
+
+.my-task-details > span
+{
+        font-size: 17px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .my-task-card {
+        padding: 10px;
+    }
+    .my-task-title {
+        font-size: 14px;
+    }
+    .my-task-details {
+        font-size: 12px;
+    }
+}

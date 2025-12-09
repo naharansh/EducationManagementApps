@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="student_management.action_student_fees" model="ir.actions.act_window">
+        <field name="name">Monthly Fees</field>
+        <field name="res_model">student.fees</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="student_management.action_fee_due" model="ir.actions.act_window">
+        <field name="name">Monthly Fee Dues</field>
+        <field name="res_model">edu.fee.due</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="student_management.action_student_fee_payment" model="ir.actions.act_window">
+        <field name="name">Fee Payments</field>
+        <field name="res_model">edu.feepayment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="student_management.view_student_fees_list" model="ir.ui.view">
+        <field name="name">student.fees.list</field>
+        <field name="model">student.fees</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="student_id"/>
+                <field name="class_id"/>
+                <field name="month"/>
+                <field name="year"/>
+                <field name="monthly_fee"/>
+                <field name="due_id"/>
+            </list>
+        </field>
+    </record>
+    <record id="student_management.view_student_fees_form" model="ir.ui.view">
+        <field name="name">student.fees.form</field>
+        <field name="model">student.fees</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_generate_fee_due"
+                            type="object"
+                            string="Generate Fee Due"
+                            class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="student_id"/>
+                        <field name="class_id" readonly="1"/>
+                        <field name="month"/>
+                        <field name="year"/>
+                        <field name="monthly_fee"/>
+                        <field name="due_id" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="student_management.view_fee_due_list" model="ir.ui.view">
+        <field name="name">edu.fee.due.list</field>
+        <field name="model">edu.fee.due</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="student_id"/>
+                <field name="class_id"/>
+                <field name="month"/>
+                <field name="year"/>
+                <field name="amount"/>
+                <field name="paid_amount"/>
+                <field name="balance_amount"/>
+                <field name="monthly_status"/>
+                <field name="yearly_status"/>
+            </list>
+        </field>
+    </record>
+    <record id="student_management.view_fee_due_form" model="ir.ui.view">
+        <field name="name">edu.fee.due.form</field>
+        <field name="model">edu.fee.due</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="student_id"/>
+                        <field name="class_id" readonly="1"/>
+                        <field name="month"/>
+                        <field name="year"/>
+                    </group>
+                    <group>
+                        <field name="amount"/>
+                        <field name="paid_amount"/>
+                        <field name="balance_amount"/>
+                    </group>
+                    <group>
+                        <field name="monthly_status" readonly="1"/>
+                        <field name="yearly_status" readonly="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Payments">
+                            <field name="payment_ids">
+                                <list editable="bottom">
+                                    <field name="payment_date"/>
+                                    <field name="paid_amount"/>
+                                    <field name="student_id" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="student_management.view_fee_payment_list" model="ir.ui.view">
+        <field name="name">edu.feepayment.list</field>
+        <field name="model">edu.feepayment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="payment_date"/>
+                <field name="student_id"/>
+                <field name="class_id"/>
+                <field name="due_id"/>
+                <field name="paid_amount"/>
+            </list>
+        </field>
+    </record>
+    <record id="student_management.view_fee_payment_form" model="ir.ui.view">
+        <field name="name">edu.feepayment.form</field>
+        <field name="model">edu.feepayment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="payment_date"/>
+                        <field name="student_id"/>
+                        <field name="due_id"/>
+                        <field name="class_id" readonly="1"/>
+                        <field name="paid_amount"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+<record id="student_management.view_remaining_fee_students_list" model="ir.ui.view">
+    <field name="name">student.fees.remaining.list</field>
+    <field name="model">student.fees.remaining</field>
+    <field name="arch" type="xml">
+        <list>
+            <field name="student_id"/>
+            <field name="class_id"/>
+            <field name="month"/>
+            <field name="year"/>
+            <field name="total_fee"/>
+            <field name="paid_amount"/>
+            <field name="balance_amount"/>
+        </list>
+    </field>
+</record>
+
+
+<record id="student_management.view_remaining_fee_students_search" model="ir.ui.view">
+    <field name="name">student.fees.remaining.search</field>
+    <field name="model">student.fees.remaining</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="student_id"/>
+            <field name="class_id"/>
+            <field name="month"/>
+
+            <!-- Payment Status Filters -->
+            <filter name="unpaid" string="Unpaid"
+                    domain="[('paid_amount','=',0)]"/>
+
+            <filter name="partial" string="Partially Paid"
+                    domain="[('paid_amount','>',0), ('balance_amount','>',0)]"/>
+
+            <filter name="paid" string="Paid"
+                    domain="[('balance_amount','=',0)]"/>
+
+            <!-- Remaining Fee Filter -->
+            <filter name="remaining" string="Remaining Fee"
+                    domain="[('balance_amount','>',0)]"/>
+        </search>
+    </field>
+</record>
+<record id="student_management.action_remaining_fee_students" model="ir.actions.act_window">
+    <field name="name">Remaining Fee Students – This Month</field>
+    <field name="res_model">student.fees.remaining</field>
+    <field name="view_mode">list,form</field>
+
+    <!-- Show only students with remaining fee in current month -->
+    <field name="domain">[('balance_amount','>',0)]</field>
+
+    <field name="search_view_id"
+           ref="student_management.view_remaining_fee_students_search"/>
+</record>
+
+
+
+</odoo>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Monthly Attendance Form -->
+    <record id="view_monthly_attendance_form" model="ir.ui.view">
+        <field name="name">edu.attendence.form</field>
+        <field name="model">edu.attendence</field>
+        <field name="arch" type="xml">
+            <form string="Monthly Attendance Report">
+                <header>
+                    <button name="action_generate" type="object" string="Generate Report" class="btn-primary"/>
+                    <button name="action_print_pdf" type="object" string="Print Report" class="btn-secondary"/>
+                    <!-- <button name="action_open_graph" type="object" class="oe_stat_button" string="Graph" icon="fa-bar-chart"/> -->
+                </header>
+                <sheet>
+                    <group>
+                        <field name="month" required="1"/>
+                        <field name="date" required="1"/>
+                        <field name="class_id" required="1"/>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="student_id"/>
+                            <field name="present_days"/>
+                            <field name="absent_days"/>
+                        </list>
+                        <form>
+                            <sheet>
+                                <group>
+                                    <field name="student_id" readonly="1"/>
+                                    <field name="present_days" readonly="1"/>
+                                    <field name="absent_days" readonly="1"/>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Monthly Attendance list -->
+    <record id="view_monthly_attendance_tree" model="ir.ui.view">
+        <field name="name">edu.attendence.list</field>
+        <field name="model">edu.attendence</field>
+        <field name="arch" type="xml">
+            <list string="Monthly Attendance">
+                <field name="month"/>
+                <field name="total_present_students"/>
+                <field name="class_id"/>
+                <field name="date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Monthly Attendance Line Form -->
+    <record id="view_monthly_attendance_line_form" model="ir.ui.view">
+        <field name="name">edu.monthly.attendence.line.form</field>
+        <field name="model">edu.monthly.attendence.line</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Line">
+                <sheet>
+                    <group>
+                        <field name="report_id" readonly="1"/>
+                        <!-- <field name="student_id" readonly="1"/> -->
+                        <field name="present_days" readonly="1"/>
+                        <field name="absent_days" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Graph View -->
+    
+
+    <!-- Actions -->
+    <record id="action_monthly_attendance" model="ir.actions.act_window">
+        <field name="name">Monthly Attendance</field>
+        <field name="res_model">edu.attendence</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+   
+    <record id="view_monthly_attendance_line_tree" model="ir.ui.view">
+    <field name="name">edu.monthly.attendence.line.list</field>
+    <field name="model">edu.monthly.attendence.line</field>
+    <field name="arch" type="xml">
+        <list string="Attendance Lines">
+            <field name="report_id"/>
+            <field name="student_id"/>
+            <field name="present_days"/>
+            <field name="absent_days"/>
+        </list>
+    </field>
+</record>
+
+
+    <!-- Menus -->
+   
+</odoo>

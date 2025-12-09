@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_task_kanban" model="ir.ui.view">
+    <field name="name">edu.task.kanban</field>
+    <field name="model">edu.task</field>
+    <field name="arch" type="xml">
+        <kanban>
+            <templates>
+                <!-- Required card template -->
+                <t t-name="card">
+                    <div class="oe_kanban_card">
+                        <field name="name"/>
+                    </div>
+                </t>
+
+                <!-- Main kanban box template -->
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_card">
+                        <div class="oe_kanban_content">
+                            <strong><field name="name"/></strong>
+                            <div><field name="teacher_id"/></div>
+                            <div><field name="deadline"/></div>
+                            <div><field name="priority"/></div>
+                            <div><field name="stage_id"/></div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+</odoo>
