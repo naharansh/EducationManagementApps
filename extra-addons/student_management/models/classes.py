@@ -1,7 +1,8 @@
 from odoo import models,fields,api
 from odoo.exceptions import ValidationError
 from datetime import timedelta
-
+import re 
+# import imghdr
 class ClassBatch(models.Model):
     _name='batch.class'
     _description='Class/Batch'
@@ -11,7 +12,7 @@ class ClassBatch(models.Model):
     teacher_id = fields.Many2one('edu.teacher', string="Class Teacher")
     start_date = fields.Date(string="Start Date")
     end_date = fields.Date(string="End Date" ,store=True, compute='_compute_end_date')
-
+    
     student_count = fields.Integer(
         string="Number of Students",
         compute='_compute_student_count',store=True
@@ -52,6 +53,8 @@ class ClassBatch(models.Model):
     @api.constrains('capacity')
     def _check_capacity(self):
         for rec in self:
+            if not rec.capacity :
+                raise ValidationError("Field contains value")
             if rec.capacity < 0:
                 raise ValidationError("Capacity must be a positive number.")
 
@@ -61,3 +64,32 @@ class ClassBatch(models.Model):
 
             if rec.capacity and len(rec.student_ids) > rec.capacity:
                 raise ValidationError("Number of students cannot exceed class capacity.")
+    @api.constrains('name')
+    def _check_studentname(self):
+        for rec in self:
+            stripped_name =rec.name.strip()
+            if not stripped_name:
+                raise ValidationError('Field must not be empty or just whitespace.')
+
+                # Ensure the name only contains alphabets and spaces (no special characters or numbers)
+            if not all(word.isalpha() or word.isspace() for word in stripped_name):
+                raise ValidationError("Field should only contain alphabets and spaces.")
+
+                # Ensure no excessive spaces between words (more than one space between words)
+            if '  ' in stripped_name:  # Check for multiple consecutive spaces
+                raise ValidationError("Field must not contain excessive spaces between words.")
+    @api.constrains('code')
+    def _check_id(self):
+        for record in self:
+            existing_student=self.search([('code','=',record.code)],limit=1)
+            if existing_student and existing_student != record:
+                raise ValidationError("class ID must be unique.")
+    @api.constrains('start_date')
+    def _check_date(self):
+         for record in self:
+            if not record.start_date:
+                raise ValidationError("Start date is requried")
+
+                
+        
+

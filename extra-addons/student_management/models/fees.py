@@ -10,7 +10,7 @@ class StudentFees(models.Model):
     student_id = fields.Many2one("student.model", string="Student", required=True)
     class_id = fields.Many2one("batch.class", related="student_id.class_id", store=True, readonly=True)
 
-    month = fields.Selection([(str(i), str(i)) for i in range(1, 13)], required=True,  default=lambda self: str(date.today().month))
+    month = fields.Selection([(str(i), str(i)) for i in range(1, 13)], required=True,default=lambda self: str(date.today().month))
     year = fields.Char(string="Year", default=lambda self: str(date.today().year), required=True)
     monthly_fee = fields.Float(string="Monthly Fee", related="student_id.yearly_fee", store=True, readonly=True)
     due_id = fields.Many2one("edu.fee.due", string="Fee Due")
@@ -41,13 +41,14 @@ class FeeDue(models.Model):
     _description = "Monthly Fee Due"
     _order = "id desc"
 
-    student_id = fields.Many2one("student.model", required=True)
+    student_id = fields.Many2one("student.model", required=True,readonly=True)
     class_id = fields.Many2one("batch.class", related="student_id.class_id", store=True, readonly=True)
 
     month = fields.Selection(
         [(str(i), str(i)) for i in range(1, 13)],
         string="Month",
-        required=True
+        required=True,
+        default=lambda self: str(date.today().month)
     )
     year = fields.Char(string="Year", required=True, default=lambda self: str(date.today().year))
 

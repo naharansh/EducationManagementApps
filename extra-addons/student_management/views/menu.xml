@@ -142,6 +142,9 @@
               <menuitem id="menu_attendance_root" name="Attendance" parent="student_management.menu_edu_root" sequence="40"/>
 <menuitem id="menu_monthly_attendance" name="Monthly Attendance" parent="menu_attendance_root" action="action_monthly_attendance" sequence="50"/>
 <!-- <menuitem id="menu_attendance_graph" name="Attendance Graph" parent="menu_attendance_root" action="action_attendance_graph" sequence="60"/> -->
-
+         <menuitem id="menu_education_dashboard" 
+          name="Dashboard" 
+          parent="student_management.menu_edu_root"
+          action="action_education_dashboard"/>
 
 </odoo>

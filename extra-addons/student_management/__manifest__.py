@@ -19,10 +19,8 @@ Long description of module's purpose
     # any module necessary for this one to work correctly
    'depends': ['base', 'calendar'],
 
-    'data': [
-        
+    'data': [      
         'security/ir.model.access.csv',
-
         # Sequences FIRST
         'data/edu_sequence.xml',
         'data/edu_classcodesequence.xml',
@@ -41,14 +39,18 @@ Long description of module's purpose
         'views/report.xml',
         'views/menu.xml',
         'views/templates.xml',
-        'views/reports.xml',],
+        'views/reports.xml', 
+        'views/dashboard.xml',
+        
+        ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
     'assets':{
         'web.assets_backend':[
-            'student_management/static/src/style.css'
+            'student_management/static/src/style.css',
+          
         ]
     }
 }
